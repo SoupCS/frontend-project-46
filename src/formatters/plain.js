@@ -7,7 +7,6 @@ const formattingValue = (value) => {
   return _.isString(value) ? `'${value}'` : value
 }
 
-
 const formatToPlain = (data) => {
   const getResult = (tree, path) => tree.flatMap((node) => {
     const newPath = [...path, node.key]
