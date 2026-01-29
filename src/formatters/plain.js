@@ -1,44 +1,33 @@
-import _ from 'lodash'
+import _ from 'lodash';
 
-const formatValue = (value) => {
-  if (_.isPlainObject(value)) {
-    return '[complex value]'
+const formattingValue = (value) => {
+  if (_.isObjectLike(value)) {
+    return '[complex value]';
   }
+  return _.isString(value) ? `'${value}'` : value;
+};
 
-  if (_.isString(value)) {
-    return `'${value}'`
-  }
+const formatToPlain = (data) => {
+  const getResult = (tree, path) => tree.flatMap((node) => {
+    const newPath = [...path, node.key];
 
-  return value
-}
+    switch (node.type) {
+      case 'nested':
+        return getResult(node.children, newPath);
+      case 'added':
+        return `Property '${newPath.join('.')}' was added with value: ${formattingValue(node.value)}`;
+      case 'deleted':
+        return `Property '${newPath.join('.')}' was removed`;
+      case 'changed':
+        return `Property '${newPath.join('.')}' was updated. From ${formattingValue(node.oldValue)} to ${formattingValue(node.newValue)}`;
+      case 'unchanged':
+        return [];
+      default:
+        throw new Error(`Wrong node type: ${node.type}!`);
+    }
+  });
+  const result = getResult(data, []);
+  return result.join('\n');
+};
 
-const formatToPlain = (tree) => {
-  const iter = (nodes, path) =>
-    nodes.flatMap((node) => {
-      const currentPath = [...path, node.key].join('.')
-
-      switch (node.type) {
-        case 'nested':
-          return iter(node.children, [...path, node.key])
-
-        case 'added':
-          return `Property '${currentPath}' was added with value: ${formatValue(node.value)}`
-
-        case 'deleted':
-          return `Property '${currentPath}' was removed`
-
-        case 'changed':
-          return `Property '${currentPath}' was updated. From ${formatValue(node.oldValue)} to ${formatValue(node.newValue)}`
-
-        case 'unchanged':
-          return []
-
-        default:
-          throw new Error(`Unknown node type: ${node.type}`)
-      }
-    })
-
-  return iter(tree, []).join('\n')
-}
-
-export default formatToPlain
+export default formatToPlain;
