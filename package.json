@@ -1,0 +1,44 @@
+{
+  "name": "frontend-project-46",
+  "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/SoupCS/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/SoupCS/frontend-project-46/actions)",
+  "type": "module",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoupCS/frontend-project-46.git"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
+  },
+  "scripts": {
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SoupCS/frontend-project-46/issues"
+  },
+  "homepage": "https://github.com/SoupCS/frontend-project-46#readme",
+  "dependencies": {
+    "cross-env": "^7.0.2",
+    "@eslint/js": "^9.39.2",
+    "@jest/globals": "^30.2.0",
+    "@stylistic/eslint-plugin": "^5.7.1",
+    "commander": "^14.0.2",
+    "eslint": "^9.39.2",
+    "globals": "^17.2.0",
+    "js-yaml": "^4.1.1",
+    "lodash": "^4.17.23"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.6",
+    "@babel/preset-env": "^7.28.6",
+    "babel-jest": "^30.2.0",
+    "jest": "^30.2.0"
+  }
+}

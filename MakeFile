@@ -1,0 +1,11 @@
+install:
+	npm ci
+	sudo npm link
+
+test:
+	npm test
+
+lint:
+	npx eslint .
+
+.PHONY: test
