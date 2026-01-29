@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import parse from './src/parsers.js';
 import formatResult from './src/formatters/index.js';
-import buildTree from './src/buildTree.js';
+import buildTree from './src/core/buildTree.js';
 
 const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 
